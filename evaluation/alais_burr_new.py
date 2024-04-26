@@ -120,8 +120,17 @@ def evaluate_ab(DNF_params, audio_params, logpolar, dimension, scenarii = _SCENA
     scen_bmb = []
     scen_exp = []
     for sce_params in scenarii:
+        audio_rel = sce_params[5]
         audio_pos = log_position(sce_params[0]/20.) if logpolar else sce_params[0]/20.
-        I_audio = gaussian(X, audio_pos, 7.14972/20., 0.0573489, norm = False)
+        if audio_rel == 25:
+            amp_key = 'amp25'
+        elif audio_rel == 31:
+            amp_key = 'amp31'
+        elif audio_rel == 37:
+            amp_key = 'amp37'
+        elif audio_rel == 43:
+            amp_key = 'amp43'
+        I_audio = gaussian(X, audio_pos, audio_params['std']/20., audio_params[amp_key], norm = False)
         visio_pos = sce_params[1]
         visio_std = sce_params[2]
         mod_avg, mod_std, no_act, bomb, expo = _measure_scenario(X, DNF_params, I_audio, logpolar, visio_pos, visio_std)

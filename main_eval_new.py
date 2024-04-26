@@ -5,7 +5,7 @@ import sys
 import numpy as np
 import json
 
-from evaluation.alais_burr import evaluate_ab
+from evaluation.alais_burr_new import evaluate_ab
 
 if len(sys.argv) > 1:
     MODEL_NAME = sys.argv[1]
@@ -24,6 +24,8 @@ def evaluate_ab_wrapper(**kwargs):
 	DNF_params['noise_amp'] = kwargs['noise_amp']
 	audio_params = {}
 	audio_params['amp'] = kwargs['audio_amp']
+      
+
 	audio_params['std'] = kwargs['audio_std']
 	logpolar = kwargs['logpolar']
 	dimension = kwargs['dimension']
@@ -46,4 +48,3 @@ mod_stds = 20. * np.median(meta_std, axis = 1)
 
 print(np.array2string(mod_avgs, separator=', '))
 print(np.array2string(mod_stds, separator=', '))
-
