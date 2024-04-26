@@ -22,7 +22,7 @@ DX = .02
 df = pd.read_excel('dataVentriloquie.xlsx')
 std_dict = calculate_std(df)
 cond_dict = avg_std_par_condition(df)
-print(std_dict)
+#print(std_dict)
 #print(cond_dict)
 #print(len(cond_dict)) # 512 correct
 filtered_cond_dict = {key: value for key, value in cond_dict.items() if not np.isnan(value).any()}
