@@ -6,6 +6,7 @@ import numpy as np
 import json
 
 from evaluation.alais_burr_new import evaluate_ab
+from sklearn.model_selection import GridSearchCV
 
 if len(sys.argv) > 1:
     MODEL_NAME = sys.argv[1]
