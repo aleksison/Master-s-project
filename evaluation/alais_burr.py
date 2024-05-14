@@ -78,6 +78,7 @@ def evaluate_ab(DNF_params, audio_params, logpolar, dimension, scenarii = _SCENA
     scen_noa = []
     scen_bmb = []
     scen_exp = []
+    print("Scenarii is ", scenarii)
     for sce_params in scenarii:
         audio_pos = log_position(sce_params[0]/20.) if logpolar else sce_params[0]/20.
         I_audio = gaussian(X, audio_pos, audio_params['std']/20., audio_params['amp'], norm = False)

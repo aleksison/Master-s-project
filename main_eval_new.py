@@ -15,7 +15,7 @@ else:
 
 
 
-def evaluate_ab_wrapper(**kwargs):
+def evaluate_ab_wrapper(a,v, **kwargs):
 	DNF_params = {}
 	DNF_params['tau'] = kwargs['tau']
 	DNF_params['excit_amp'] = kwargs['excit_amp']
@@ -24,26 +24,35 @@ def evaluate_ab_wrapper(**kwargs):
 	DNF_params['inhib_std'] = kwargs['inhib_std']
 	DNF_params['noise_amp'] = kwargs['noise_amp']
 	audio_params = {}
-	audio_params['amp'] = kwargs['audio_amp']
-      
-
+	audio_params['a'] = a
 	audio_params['std'] = kwargs['audio_std']
+	visio_params = {}
+	visio_params['v'] = v
+	#visio_params['std'] = kwargs['visio_std']  #could be extracted to the json file later on
 	logpolar = kwargs['logpolar']
 	dimension = kwargs['dimension']
-	return evaluate_ab(DNF_params, audio_params, logpolar, dimension)
+	return evaluate_ab(DNF_params, audio_params, visio_params, logpolar, dimension)
 
 
 
 with open("./config/config_" + MODEL_NAME + ".json") as f:
     params = json.load(f)
-   
+
+#Finetunning parameters for audio and visual stimuli
+v2 = np.linspace(0.075, 0.3667, 4) #so that the amplitude is around 1
+
+
+a2 = np.linspace(0.004,0.046, 4) #for any value of dB -> amp between 0.1 and 2
+
+a_val = a2[1] # the optimal value
+v_val = v2[3]
 
 NB_META = 25 # para cada scenario 25 ejecuciones
 NB_SCEN = 256 # theoretically it is 512, on practice it is 256
 meta_avg = np.zeros((NB_SCEN, NB_META))
 meta_std = np.zeros((NB_SCEN, NB_META))
 for i in range(NB_META):
-	meta_avg[:, i], meta_std[:, i], _, _, _ = evaluate_ab_wrapper(**dict(zip(params['names'], params['values'])))
+	meta_avg[:, i], meta_std[:, i], _, _, _ = evaluate_ab_wrapper(a_val, v_val, **dict(zip(params['names'], params['values'])))
 mod_avgs = 20. * np.median(meta_avg, axis = 1)
 mod_stds = 20. * np.median(meta_std, axis = 1)
 

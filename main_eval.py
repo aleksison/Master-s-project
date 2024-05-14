@@ -36,7 +36,7 @@ with open("./config/config_" + MODEL_NAME + ".json") as f:
    
 
 NB_META = 25 # para cada scenario 25 ejecuciones
-NB_SCEN = 256 # theoretically it is 512, on practice it is 256
+NB_SCEN = 15 # theoretically it is 512, on practice it is 256
 meta_avg = np.zeros((NB_SCEN, NB_META))
 meta_std = np.zeros((NB_SCEN, NB_META))
 for i in range(NB_META):
