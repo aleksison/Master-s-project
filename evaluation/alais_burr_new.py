@@ -32,7 +32,8 @@ for key in filtered_cond_dict:
     expected_pos, expected_std = filtered_cond_dict[key]
     audio_rel = key[0]
     vis_rel = key[1]
-    _SCENARII.append([audio_pos, vis_pos, expected_pos, expected_std, audio_rel, vis_rel])
+    congruent = audio_pos == vis_pos
+    _SCENARII.append([audio_pos, vis_pos, expected_pos, expected_std, audio_rel, vis_rel, congruent])
 
 print(_SCENARII)
 print("Number of scenarios: ", len(_SCENARII))
@@ -85,14 +86,15 @@ def evaluate_ab(DNF_params, audio_params, visio_params, logpolar, dimension, sce
         audio_rel = sce_params[4]
         audio_pos = log_position(sce_params[0]/20.) if logpolar else sce_params[0]/20.
         amp_key = audio_params['a'] # and what do we do for intensities with gabor? 0.5 etc
-        if audio_rel == 25:
-            amp_key = audio_params['a']*25
-        elif audio_rel == 31:
-            amp_key = audio_params['a']*31
-        elif audio_rel == 37:
-            amp_key = audio_params['a']*37
-        elif audio_rel == 43:
-            amp_key = audio_params['a']*43
+        # if audio_rel == 25:
+        #     amp_key = audio_params['a']*25
+        # elif audio_rel == 31:
+        #     amp_key = audio_params['a']*31
+        # elif audio_rel == 37:
+        #     amp_key = audio_params['a']*37
+        # elif audio_rel == 43:
+        #     amp_key = audio_params['a']*43
+        amp_key = audio_params['a']*audio_rel
         I_audio = gaussian(X, audio_pos, audio_params['std']/20., amp_key, norm = False)
         visio_pos = sce_params[1]
         visio_rel = sce_params[5]

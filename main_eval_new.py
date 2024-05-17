@@ -39,6 +39,7 @@ with open("./config/config_" + MODEL_NAME + ".json") as f:
     params = json.load(f)
 
 #Finetunning parameters for audio and visual stimuli
+# [0.075   0.17223333 0.26946667 0.3667    ] [0.004 0.018 0.032 0.046] v2, a2
 v2 = np.linspace(0.075, 0.3667, 4) #so that the amplitude is around 1
 
 
@@ -48,7 +49,7 @@ a_val = a2[1] # the optimal value
 v_val = v2[3]
 
 NB_META = 25 # para cada scenario 25 ejecuciones
-NB_SCEN = 256 # theoretically it is 512, on practice it is 256
+NB_SCEN = 128 # theoretically it is 512, on practice it is 256
 meta_avg = np.zeros((NB_SCEN, NB_META))
 meta_std = np.zeros((NB_SCEN, NB_META))
 for i in range(NB_META):

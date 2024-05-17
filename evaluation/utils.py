@@ -57,7 +57,7 @@ def avg_std_par_condition(df):
                 for pos_v in unique_position_v:
                 # data frame for a specific combination of the 4 parameters
                     filtered_df = df[(df['FiabiliteA'] == fiab_a) & (df['FiabiliteV'] == fiab_v) &
-                                 (df['PositionA'] == pos_a) & (df['PositionV'] == pos_v)]
+                                 (df['PositionA'] == pos_a) & (df['PositionV'] == pos_v) & (df['stimV'] == "points")]
                     avg_x = np.mean(filtered_df['X'])
                     std_x = np.std(filtered_df['X'])
                     

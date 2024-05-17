@@ -1,17 +1,35 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from help import scenarios, mean7, std7
+from help_points import scenarios_points, mean13, std13
 
-experimental_positions = [scenario[2] for scenario in scenarios]
-experimental_stds = [scenario[3] for scenario in scenarios]
+experimental_positions = [scenario[2] for scenario in scenarios_points]
+experimental_stds = [scenario[3] for scenario in scenarios_points]
 
-model_positions = mean7
-model_stds = std7
+model_positions = mean13
+model_stds = std13
+
+# Different colours for congruent and not congruent scenarios
+#colours = ['#88c999' if scenario[6] else 'blue' for scenario in scenarios_points]
 
 # Scatter plot
-plt.figure(figsize=(8,6))
-plt.scatter(experimental_positions, model_positions, color='#88c999', label='Model Positions')
+#plt.figure(figsize=(8,6))
+#plt.scatter(experimental_positions, model_positions, color=colours, label='Model Positions')
+
+# Define colors for congruent and incongruent stimuli
+congruent_color = '#88c999'
+incongruent_color = 'blue'
+
+# Scatter plot for congruent stimuli
+plt.scatter([pos for i, pos in enumerate(experimental_positions) if scenarios_points[i][6]], 
+            [pos for i, pos in enumerate(model_positions) if scenarios_points[i][6]], 
+            color=congruent_color, label='Congruent stimuli')
+
+# Scatter plot for incongruent stimuli
+plt.scatter([pos for i, pos in enumerate(experimental_positions) if not scenarios_points[i][6]], 
+            [pos for i, pos in enumerate(model_positions) if not scenarios_points[i][6]], 
+            color=incongruent_color, label='Incongruent stimuli')
+
 
 # Add diagonal line for reference
 plt.plot(experimental_positions, experimental_positions, color='red', linestyle='--', label='Ideal Agreement')
