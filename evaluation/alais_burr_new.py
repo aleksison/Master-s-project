@@ -8,7 +8,7 @@ from .preprocessing import *
 from .model import DNF
 from .utils import *
 
-VISIO_STD = 16.6 # this is an average of 2, 16, 32
+VISIO_STD = 11 # this is an average of 2, 16, 32  for all calculus 16.6 was used      I tried with 10 and 20 and I will try with 8
 NB_RUNS = 50
 X_MIN = -1.
 X_MAX = 1.
@@ -100,14 +100,15 @@ def evaluate_ab(DNF_params, audio_params, visio_params, logpolar, dimension, sce
         visio_rel = sce_params[5]
         visio_v = visio_params['v']
         visio_amp = visio_v
-        if visio_rel == 3:
-           visio_amp = visio_v*3
-        elif visio_rel == 6:
-           visio_amp = visio_v*6
-        elif visio_rel == 9:
-            visio_amp = visio_v*9
-        elif visio_rel == 12:
-            visio_amp = visio_v*12
+        # if visio_rel == 3:
+        #    visio_amp = visio_v*3
+        # elif visio_rel == 6:
+        #    visio_amp = visio_v*6
+        # elif visio_rel == 9:
+        #     visio_amp = visio_v*9
+        # elif visio_rel == 12:
+        #     visio_amp = visio_v*12
+        visio_amp = visio_v*visio_rel
         mod_avg, mod_std, no_act, bomb, expo = _measure_scenario(X, DNF_params, I_audio, logpolar, visio_pos, visio_amp)
         scen_avg.append(mod_avg)
         scen_std.append(mod_std)

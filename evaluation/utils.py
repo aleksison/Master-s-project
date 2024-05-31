@@ -55,9 +55,10 @@ def avg_std_par_condition(df):
         for fiab_v in unique_fiabilite_v:
             for pos_a in unique_position_a:
                 for pos_v in unique_position_v:
-                # data frame for a specific combination of the 4 parameters
+                # data frame for a specific combination of the 4 parameters 
+                # stimV is gabor or points
                     filtered_df = df[(df['FiabiliteA'] == fiab_a) & (df['FiabiliteV'] == fiab_v) &
-                                 (df['PositionA'] == pos_a) & (df['PositionV'] == pos_v) & (df['stimV'] == "points")]
+                                 (df['PositionA'] == pos_a) & (df['PositionV'] == pos_v) & (df['stimV'] == "gabor")]
                     avg_x = np.mean(filtered_df['X'])
                     std_x = np.std(filtered_df['X'])
                     

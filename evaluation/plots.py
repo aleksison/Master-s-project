@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from help_points import scenarios_points, mean13, std13
+from help_dnf import scenarios, mean3, std3
 
-experimental_positions = [scenario[2] for scenario in scenarios_points]
-experimental_stds = [scenario[3] for scenario in scenarios_points]
+experimental_positions = [scenario[2] for scenario in scenarios]
+experimental_stds = [scenario[3] for scenario in scenarios]
 
-model_positions = mean13
-model_stds = std13
+model_positions = mean3
+model_stds = std3
 
 # Different colours for congruent and not congruent scenarios
 #colours = ['#88c999' if scenario[6] else 'blue' for scenario in scenarios_points]
@@ -21,13 +21,13 @@ congruent_color = '#88c999'
 incongruent_color = 'blue'
 
 # Scatter plot for congruent stimuli
-plt.scatter([pos for i, pos in enumerate(experimental_positions) if scenarios_points[i][6]], 
-            [pos for i, pos in enumerate(model_positions) if scenarios_points[i][6]], 
+plt.scatter([pos for i, pos in enumerate(experimental_positions) if scenarios[i][6]], 
+            [pos for i, pos in enumerate(model_positions) if scenarios[i][6]], 
             color=congruent_color, label='Congruent stimuli')
 
 # Scatter plot for incongruent stimuli
-plt.scatter([pos for i, pos in enumerate(experimental_positions) if not scenarios_points[i][6]], 
-            [pos for i, pos in enumerate(model_positions) if not scenarios_points[i][6]], 
+plt.scatter([pos for i, pos in enumerate(experimental_positions) if not scenarios[i][6]], 
+            [pos for i, pos in enumerate(model_positions) if not scenarios[i][6]], 
             color=incongruent_color, label='Incongruent stimuli')
 
 
@@ -51,4 +51,4 @@ print("RMSE for mean positions: ", rmse_positions)
 
 # Calculate RMSE for standard deviations
 rmse_stds = np.sqrt(np.mean((np.array(experimental_stds)-np.array(model_stds))**2))
-print("RMSE for standard deviatons: ", rmse_stds)
+print("RMSE for standard deviations: ", rmse_stds)
