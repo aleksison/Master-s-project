@@ -53,7 +53,7 @@ print("Amplitudes of lateral inhibition: " , inh_amp)
 ab_combinations = [(exc, inh) for exc in exc_amp for inh in inh_amp]
 valid_combinations = [(A,B) for A, B in ab_combinations if A>B ]
 print("Amplitudes' combinations: " , valid_combinations)
-dnf_amps = valid_combinations[6]
+dnf_amps = valid_combinations[9]
 a2 = np.linspace(0.004,0.046, 4) #for any value of dB -> amp between 0.1 and 2
 
 a_val = a2[1] # the optimal value
