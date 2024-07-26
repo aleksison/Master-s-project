@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from help_dnf import scenarios, mean3, std3
+from sansbruit import scenarios, exc15
 
 experimental_positions = [scenario[2] for scenario in scenarios]
-experimental_stds = [scenario[3] for scenario in scenarios]
+#experimental_stds = [scenario[3] for scenario in scenarios]
 
-model_positions = mean3
-model_stds = std3
+model_positions = exc15
+#model_stds = std21
 
 # Different colours for congruent and not congruent scenarios
 #colours = ['#88c999' if scenario[6] else 'blue' for scenario in scenarios_points]
@@ -50,5 +50,5 @@ rmse_positions = np.sqrt(np.mean((np.array(experimental_positions)-np.array(mode
 print("RMSE for mean positions: ", rmse_positions)
 
 # Calculate RMSE for standard deviations
-rmse_stds = np.sqrt(np.mean((np.array(experimental_stds)-np.array(model_stds))**2))
-print("RMSE for standard deviations: ", rmse_stds)
+#rmse_stds = np.sqrt(np.mean((np.array(experimental_stds)-np.array(model_stds))**2))
+#print("RMSE for standard deviations: ", rmse_stds)
